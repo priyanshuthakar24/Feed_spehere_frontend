@@ -26,7 +26,7 @@ const AdminLayout = () => {
         <div className="fixed md:static bg-black shadow-sm dark:bg-main-dark-bg navbar w-full">
           <Navbar className="navbarinfo" />
         </div>
-        <div>
+        <div className="pt-10">
           <Outlet />
         </div>
       </div>
