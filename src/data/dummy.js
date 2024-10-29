@@ -1,4 +1,4 @@
-import { Heart, LayoutDashboard, ShoppingBag, UserRound } from "lucide-react";
+import { Heart, LayoutDashboard, ShoppingBag, SquareTerminal, UserRound } from "lucide-react";
 //! general menu 
 export const Menus = [
     {
@@ -54,58 +54,72 @@ export const links = [
         title: 'Dashboard',
         links: [
             {
-                name: 'ecommerce',
-                icon: ShoppingBag,
+                name: 'Website Prompt',
+                icon: SquareTerminal,
+            },
+            {
+                name: 'SubDomain',
+                icon: SquareTerminal,
+            },
+            {
+                name: 'PageLinksFinder',
+                icon: SquareTerminal,
             },
         ],
     },
 
-    {
-        title: 'Pages',
-        links: [
-            {
-                name: 'map',
-                icon: LayoutDashboard,
-            },
-            {
-                name: 'timeline',
-                icon: LayoutDashboard,
-            },
-            {
-                name: 'orders',
-                icon: LayoutDashboard,
-            },
-            {
-                name: 'employees',
-                icon: Heart,
-            },
-            {
-                name: 'customers',
-                icon: Heart,
-            },
-        ],
-    },
-    {
-        title: 'Apps',
-        links: [
-            {
-                name: 'calendar',
-                icon: UserRound,
-            },
-            {
-                name: 'kanban',
-                icon: UserRound,
-            },
-            {
-                name: 'editor',
-                icon: UserRound,
-            },
-            {
-                name: 'color-picker',
-                icon: UserRound,
-            },
-        ],
-    },
+    // {
+    //     title: 'Pages',
+    //     links: [
+    //         {
+    //             name: 'map',
+    //             icon: LayoutDashboard,
+    //         },
+    //         {
+    //             name: 'timeline',
+    //             icon: LayoutDashboard,
+    //         },
+    //         {
+    //             name: 'orders',
+    //             icon: LayoutDashboard,
+    //         },
+    //         {
+    //             name: 'employees',
+    //             icon: Heart,
+    //         },
+    //         {
+    //             name: 'customers',
+    //             icon: Heart,
+    //         },
+    //     ],
+    // },
+    // {
+    //     title: 'Apps',
+    //     links: [
+    //         {
+    //             name: 'calendar',
+    //             icon: UserRound,
+    //         },
+    //         {
+    //             name: 'kanban',
+    //             icon: UserRound,
+    //         },
+    //         {
+    //             name: 'editor',
+    //             icon: UserRound,
+    //         },
+    //         {
+    //             name: 'color-picker',
+    //             icon: UserRound,
+    //         },
+    //     ],
+    // },
+
+
+
+
+
+
     // {
     // title: 'Charts',
     // links: [

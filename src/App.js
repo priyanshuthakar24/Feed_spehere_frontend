@@ -5,8 +5,9 @@ import { Profile, Wishlist, Order } from './pages/ProfileMenu/index'
 import { Login, Signup, ResetPassword, VerifyEmail, ForgotPasswordPage } from './components/auth/index'
 import { useAuth } from './context/Authcontext';
 import AdminLayout from './pages/AdminLayout';
-import Home from './components/Home';
 import WebsitePromptForm from './components/subcomponents/WebsitePromptForm';
+import SubdomainFinder from './components/subcomponents/SubdomainFinder';
+import PageLinksFinder from './components/subcomponents/PageLinksFinder';
 //!  This method check that user is authenticated or not also check that user is Verified or not if not than it will redired to login or verify-email page 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, userData } = useAuth()
@@ -103,18 +104,29 @@ function App() {
         },
       ]
     },
+
     //! if any route that is not on the above roues than it will redirect to '/' route:- Universel route 
-    // {
-    //   path: "*",
-    //   element: <Navigate to='/' replace />,
-    // },
+    {
+      path: "*",
+      element: <Navigate to='/' replace />,
+    },
+
+    // //! Dashbord route and their sub-route
     {
       path: '/dashbord',
       element: <AdminProtectedRoute><AdminLayout /></AdminProtectedRoute>,
       children: [{
-        path: 'ecommerce',
+        path: 'Website Prompt',
         element: <WebsitePromptForm />
-      }]
+      }, {
+        path: 'SubDomain',
+        element: <SubdomainFinder />
+      }
+        , {
+        path: 'PageLinksFinder',
+        element: <PageLinksFinder />
+      }
+      ]
     }
   ])
   return (

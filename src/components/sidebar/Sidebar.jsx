@@ -39,7 +39,7 @@ const Sidebar = () => {
               className=" flex items-center gap-3 ml-3   mt-4 text-xl font-extrabold tracking-tight text-white"
             >
               <Store />
-              <span>WebStore</span>
+              <span>FeedSphere</span>
             </Link>
             <Tooltip title="Close" placement="bottom">
               <button
