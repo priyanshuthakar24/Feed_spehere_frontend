@@ -19,7 +19,7 @@ const WebsitePromptForm = () => {
       setLoading(true);
       const { website, prompt } = values;
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/process-prompt`,
+        `${process.env.REACT_APP_API}/api/bestsubdomain`,
         { website, prompt }
       );
       if (res) {
@@ -67,10 +67,16 @@ const WebsitePromptForm = () => {
         </Form.Item>
 
         {/* Submit Button */}
-        <Button type="primary" htmlType="submit" loading={loading} block>
+        <Button
+          variant="solid"
+          color="default"
+          htmlType="submit"
+          loading={loading}
+          block
+        >
           Submit
         </Button>
-      </Form>
+      </Form> 
 
       {/* Response Output */}
       {response && (
@@ -80,7 +86,7 @@ const WebsitePromptForm = () => {
             {/* <pre>{JSON.stringify(response,null,5)}</pre> */}
             <JsonFormatter json={response} tabWith={4} jsonStyle={jsonStyle} />
           </div>
-            {/* <div class="container mx-auto px-4 py-8 bg-gray-500">
+          {/* <div class="container mx-auto px-4 py-8 bg-gray-500">
               <h1 class="text-3xl font-bold text-center mb-6">
                 SerpentCS: Company and Product Details
               </h1>
