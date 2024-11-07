@@ -8,6 +8,7 @@ import AdminLayout from './pages/AdminLayout';
 import WebsitePromptForm from './components/subcomponents/WebsitePromptForm';
 import SubdomainFinder from './components/subcomponents/SubdomainFinder';
 import PageLinksFinder from './components/subcomponents/PageLinksFinder';
+import Categoryform from './components/subcomponents/Categoryform';
 //!  This method check that user is authenticated or not also check that user is Verified or not if not than it will redired to login or verify-email page 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, userData } = useAuth()
@@ -121,10 +122,12 @@ function App() {
       }, {
         path: 'SubDomain',
         element: <SubdomainFinder />
-      }
-        , {
+      }, {
         path: 'PageLinksFinder',
         element: <PageLinksFinder />
+      }, {
+        path: 'category',
+        element: <Categoryform />
       }
       ]
     }

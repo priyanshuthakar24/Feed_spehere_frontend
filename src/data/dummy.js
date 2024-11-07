@@ -65,6 +65,10 @@ export const links = [
                 name: 'PageLinksFinder',
                 icon: SquareTerminal,
             },
+            {
+                name: 'category',
+                icon: SquareTerminal,
+            },
         ],
     },
 

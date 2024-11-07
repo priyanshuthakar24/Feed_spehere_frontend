@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Input, message, Button, Select } from "antd";
+import React, { useEffect, useState } from "react";
+import { Form, Input, message, Button, Select, Cascader } from "antd";
 import JsonFormatter from "react-json-formatter";
 import axios from "axios";
 const WebsitePromptForm = () => {
@@ -13,7 +13,31 @@ const WebsitePromptForm = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
-
+  const [categorydata, setcategorydata] = useState([]);
+  // let categorydata = [];
+  const fetchcategory = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_API}/api/category`);
+    if (res) {
+      setcategorydata(
+        res.data.map((item) => {
+          return {
+            value: item.category,
+            label: item.category,
+            children: item.subcategory.map((item) => ({
+              value: item.name,
+              label: item.name,
+            })),
+          };
+        })
+      );
+    }
+  };
+  const onChange = (value) => {
+    console.log(value);
+  };
+  useEffect(() => {
+    fetchcategory();
+  }, []);
   const handleSubmit = async (values) => {
     try {
       setLoading(true);
@@ -39,11 +63,17 @@ const WebsitePromptForm = () => {
       </h2>
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Form.Item label="Category" name="category">
-          <Select placeholder="Please Select Field">
+          {/* <Select placeholder="Please Select Field">
             <Option value="Cricket">Cricket</Option>
             <Option value="Business">Business</Option>
             <Option value="Food">Food</Option>
-          </Select>
+          </Select> */}
+          <Cascader
+          size="large"
+            options={categorydata}
+            onChange={onChange}
+            placeholder="Please select"
+          />
         </Form.Item>
         {/* Website URL Input */}
         <Form.Item
@@ -76,7 +106,7 @@ const WebsitePromptForm = () => {
         >
           Submit
         </Button>
-      </Form> 
+      </Form>
 
       {/* Response Output */}
       {response && (
