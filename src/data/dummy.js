@@ -1,4 +1,4 @@
-import { Heart, LayoutDashboard, ShoppingBag, SquareTerminal, UserRound } from "lucide-react";
+import { Heart, LayoutDashboard, ShoppingBag, Square, SquareTerminal, UserRound } from "lucide-react";
 //! general menu 
 export const Menus = [
     {
@@ -69,6 +69,14 @@ export const links = [
                 name: 'category',
                 icon: SquareTerminal,
             },
+            {
+                name: 'keyword',
+                icon: Square
+            },
+            {
+                name: 'admininput',
+                icon: Square
+            }
         ],
     },
 

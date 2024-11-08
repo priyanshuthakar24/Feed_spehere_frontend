@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Form, Input, message, Button, Cascader } from "antd";
-import JsonFormatter from "react-json-formatter";
+import { Button, Cascader, Form, Input, message } from "antd";
 import axios from "axios";
-const WebsitePromptForm = () => {
+import React, { useEffect, useState } from "react";
+import JsonFormatter from "react-json-formatter";
+
+const AdminInput = () => {
   // const { Option } = Select;
   const jsonStyle = {
     propertyStyle: { color: "red" },
@@ -16,7 +17,9 @@ const WebsitePromptForm = () => {
   const [categorydata, setcategorydata] = useState([]);
   // let categorydata = [];
   const fetchcategory = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_API}/api/category`);
+    const res = await axios.get(
+      `${process.env.REACT_APP_API}/api/categoryadmin`
+    );
     if (res) {
       setcategorydata(
         res.data.map((item) => {
@@ -26,10 +29,6 @@ const WebsitePromptForm = () => {
             children: item.subcategory.map((item) => ({
               value: item.name,
               label: item.name,
-              children: item.prompt.map((name) => ({
-                value: name.title,
-                label: name.title,
-              })),
             })),
           };
         })
@@ -45,10 +44,10 @@ const WebsitePromptForm = () => {
   const handleSubmit = async (values) => {
     try {
       setLoading(true);
-      const { website, prompt } = values;
+      const { website, category } = values;
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/bestsubdomain`,
-        { website, prompt }
+        `${process.env.REACT_APP_API}/api/keywordoutput`,
+        { website, category }
       );
       if (res) {
         message.success(res.data.message);
@@ -89,7 +88,7 @@ const WebsitePromptForm = () => {
         </Form.Item>
 
         {/* Prompt Input */}
-        <Form.Item
+        {/* <Form.Item
           label="Custom Prompt"
           name="prompt"
           rules={[{ required: true, message: "Please input a custom prompt!" }]}
@@ -98,7 +97,7 @@ const WebsitePromptForm = () => {
             rows={5}
             placeholder="E.g., Get the summary of the website"
           />
-        </Form.Item>
+        </Form.Item> */}
 
         {/* Submit Button */}
         <Button
@@ -120,6 +119,7 @@ const WebsitePromptForm = () => {
             {/* <pre>{JSON.stringify(response,null,5)}</pre> */}
             <JsonFormatter json={response} tabWith={4} jsonStyle={jsonStyle} />
           </div>
+
           {/* <div class="container mx-auto px-4 py-8 bg-gray-500">
               <h1 class="text-3xl font-bold text-center mb-6">
                 SerpentCS: Company and Product Details
@@ -182,4 +182,4 @@ const WebsitePromptForm = () => {
   );
 };
 
-export default WebsitePromptForm;
+export default AdminInput;
