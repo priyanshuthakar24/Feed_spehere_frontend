@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import JsonFormatter from "react-json-formatter";
 
 const AdminInput = () => {
-  // const { Option } = Select;
   const jsonStyle = {
     propertyStyle: { color: "red" },
     stringStyle: { color: "green" },
@@ -42,11 +41,12 @@ const AdminInput = () => {
     fetchcategory();
   }, []);
   const handleSubmit = async (values) => {
+    // keywordoutput
     try {
       setLoading(true);
       const { website, category } = values;
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/keywordoutput`,
+        `${process.env.REACT_APP_API}/api/keywordoutputfuse`,
         { website, category }
       );
       if (res) {
@@ -65,12 +65,11 @@ const AdminInput = () => {
         Website & Prompt Form
       </h2>
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
-        <Form.Item label="Category" name="category">
-          {/* <Select placeholder="Please Select Field">
-            <Option value="Cricket">Cricket</Option>
-            <Option value="Business">Business</Option>
-            <Option value="Food">Food</Option>
-          </Select> */}
+        <Form.Item
+          label="Category"
+          name="category"
+          rules={[{ required: true, message: "Please Select category" }]}
+        >
           <Cascader
             size="large"
             options={categorydata}
@@ -82,22 +81,16 @@ const AdminInput = () => {
         <Form.Item
           label="Website URL"
           name="website"
-          rules={[{ required: true, message: "Please input a website URL!" }]}
+          rules={[
+            { required: true, message: "Please input a website URL!" },
+            {
+              type: "url",
+              warningOnly: true,
+            },
+          ]}
         >
-          <Input placeholder="https://example.com" />
+          <Input size="large" placeholder="https://example.com" />
         </Form.Item>
-
-        {/* Prompt Input */}
-        {/* <Form.Item
-          label="Custom Prompt"
-          name="prompt"
-          rules={[{ required: true, message: "Please input a custom prompt!" }]}
-        >
-          <Input.TextArea
-            rows={5}
-            placeholder="E.g., Get the summary of the website"
-          />
-        </Form.Item> */}
 
         {/* Submit Button */}
         <Button
@@ -105,6 +98,7 @@ const AdminInput = () => {
           color="default"
           htmlType="submit"
           loading={loading}
+          size="large"
           block
         >
           Submit
