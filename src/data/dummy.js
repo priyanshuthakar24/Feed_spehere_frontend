@@ -53,29 +53,29 @@ export const links = [
     {
         title: 'Dashboard',
         links: [
-            {
-                name: 'Website Prompt',
-                icon: SquareTerminal,
-            },
-            {
-                name: 'SubDomain',
-                icon: SquareTerminal,
-            },
-            {
-                name: 'PageLinksFinder',
-                icon: SquareTerminal,
-            },
-            {
-                name: 'category',
-                icon: SquareTerminal,
-            },
+            // {
+            //     name: 'Website Prompt',
+            //     icon: SquareTerminal,
+            // },
+            // {
+            //     name: 'SubDomain',
+            //     icon: SquareTerminal,
+            // },
+            // {
+            //     name: 'PageLinksFinder',
+            //     icon: SquareTerminal,
+            // },
+            // {
+            //     name: 'category',
+            //     icon: SquareTerminal,
+            // },
             {
                 name: 'keyword',
                 icon: Square
             },
             {
                 name: 'admininput',
-                icon: Square
+                icon: SquareTerminal
             }
         ],
     },

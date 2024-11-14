@@ -67,11 +67,6 @@ const WebsitePromptForm = () => {
       </h2>
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Form.Item label="Category" name="category">
-          {/* <Select placeholder="Please Select Field">
-            <Option value="Cricket">Cricket</Option>
-            <Option value="Business">Business</Option>
-            <Option value="Food">Food</Option>
-          </Select> */}
           <Cascader
             size="large"
             options={categorydata}

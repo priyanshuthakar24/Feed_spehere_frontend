@@ -1,7 +1,8 @@
-import { Button, Cascader, Form, Input, message } from "antd";
+import { Button, Cascader, Form, Input, message, Space } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import JsonFormatter from "react-json-formatter";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 const AdminInput = () => {
   const jsonStyle = {
@@ -41,6 +42,7 @@ const AdminInput = () => {
     fetchcategory();
   }, []);
   const handleSubmit = async (values) => {
+    // return console.log(values);
     // keywordoutput
     try {
       setLoading(true);
@@ -64,7 +66,12 @@ const AdminInput = () => {
       <h2 className="text-2xl font-bold text-center mb-6">
         Website & Prompt Form
       </h2>
-      <Form form={form} layout="vertical" onFinish={handleSubmit}>
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={handleSubmit}
+        initialValues={{ website: [""] }}
+      >
         <Form.Item
           label="Category"
           name="category"
@@ -80,18 +87,55 @@ const AdminInput = () => {
         {/* Website URL Input */}
         <Form.Item
           label="Website URL"
-          name="website"
-          rules={[
-            { required: true, message: "Please input a website URL!" },
-            {
-              type: "url",
-              warningOnly: true,
-            },
-          ]}
+          // name="website"
         >
-          <Input size="large" placeholder="https://example.com" />
+          {/* //* multiple website option  */}
+          <Form.List name="website">
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map(({ key, name, ...restField }) => (
+                  <Space
+                    key={key}
+                    style={{ display: "flex", marginBottom: 8 }}
+                    align="baseline"
+                  >
+                    <Form.Item
+                      {...restField}
+                      name={[name]}
+                      rules={[
+                        {
+                          required: true,
+                          message: `Please provide website link ${key + 1}`,
+                        },
+                        {
+                          type: "url",
+                          warningOnly: true,
+                        },
+                      ]}
+                    >
+                      <Input
+                        size="large"
+                        placeholder="https://example.com"
+                        style={{ width: "60VW" }}
+                      />
+                    </Form.Item>
+                    <MinusCircleOutlined onClick={() => remove(name)} size={30} />
+                  </Space>
+                ))}
+                <Form.Item>
+                  <Button
+                    type="dashed"
+                    onClick={() => add()}
+                    block
+                    icon={<PlusOutlined />}
+                  >
+                    Add Website Link
+                  </Button>
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
         </Form.Item>
-
         {/* Submit Button */}
         <Button
           variant="solid"
@@ -105,71 +149,13 @@ const AdminInput = () => {
         </Button>
       </Form>
 
-      {/* Response Output */}
+      {/* //! Response Output */}
       {response && (
         <>
           <div className="mt-6 p-4 bg-gray-100 text-black rounded-lg">
             <h3 className="text-lg font-semibold">Response:</h3>
-            {/* <pre>{JSON.stringify(response,null,5)}</pre> */}
             <JsonFormatter json={response} tabWith={4} jsonStyle={jsonStyle} />
           </div>
-
-          {/* <div class="container mx-auto px-4 py-8 bg-gray-500">
-              <h1 class="text-3xl font-bold text-center mb-6">
-                SerpentCS: Company and Product Details
-              </h1>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                  <h2 class="text-2xl font-bold mb-4">Company Name</h2>
-                  <p class="text-gray-700 text-lg">
-                    Serpent Consulting Services Pvt Ltd
-                  </p>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6">
-                  <h2 class="text-2xl font-bold mb-4">Product Details</h2>
-                  <ul class="list-disc text-gray-700 text-lg">
-                    <li>Odoo ERP Implementation Company</li>
-                    <li>Custom Odoo Apps</li>
-                    <li>Odoo Support Package</li>
-                    <li>Hire Dedicated Developers</li>
-                    <li>Odoo Training</li>
-                    <li>Quality Assurance</li>
-                    <li>Smart City ERP Management System</li>
-                    <li>Property Management Software</li>
-                    <li>Tour and Travel Management System</li>
-                    <li>Gym Management System</li>
-                    <li>Education Management System</li>
-                    <li>Law & Legal Practice Management Software</li>
-                    <li>Human Resource Management System</li>
-                    <li>Project Scrum Management Agile</li>
-                    <li>CRM Software</li>
-                    <li>Hotel Management System</li>
-                    <li>Restaurant Management System</li>
-                    <li>Labour Management Software</li>
-                    <li>Car Wash Management System</li>
-                    <li>Visa Management Software</li>
-                    <li>Construction Management Software</li>
-                    <li>Point Of Sale</li>
-                    <li>Fleet Management System</li>
-                    <li>Odoo eCommerce</li>
-                    <li>Field Service Management</li>
-                    <li>Singapore Localization</li>
-                    <li>Salon & Spa Management</li>
-                    <li>Optical ERP</li>
-                    <li>Gym Management Mobile App</li>
-                    <li>Human Resource Management Mobile App</li>
-                    <li>Project Management Mobile App</li>
-                    <li>Customer Relationship Management Mobile App</li>
-                    <li>Field Service Management Mobile App</li>
-                    <li>Car Wash Management Mobile App</li>
-                    <li>Inventory Management Mobile App</li>
-                    <li>Trackoo</li>
-                    <li>Odoo Ring Central Integration</li>
-                    <li>Web Email Interface</li>
-                  </ul>
-                </div>
-              </div>
-            </div> */}
         </>
       )}
     </div>
