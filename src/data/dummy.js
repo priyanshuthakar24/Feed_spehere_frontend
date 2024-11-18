@@ -53,10 +53,10 @@ export const links = [
     {
         title: 'Dashboard',
         links: [
-            // {
-            //     name: 'Website Prompt',
-            //     icon: SquareTerminal,
-            // },
+            {
+                name: 'Website Prompt',
+                icon: SquareTerminal,
+            },
             // {
             //     name: 'SubDomain',
             //     icon: SquareTerminal,
