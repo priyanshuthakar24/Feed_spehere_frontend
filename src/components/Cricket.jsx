@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import JsonFormatter from "react-json-formatter";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { useStateContext } from "../context/ContextProvider";
 
 const Cricket = () => {
   const jsonStyle = {
@@ -15,6 +16,7 @@ const Cricket = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [categorydata, setcategorydata] = useState([]);
+  const { websiteresult, setwebsiteresult } = useStateContext();
   // let categorydata = [];
   const fetchcategory = async () => {
     const res = await axios.get(
@@ -53,7 +55,7 @@ const Cricket = () => {
       );
       if (res) {
         message.success(res.data.message);
-        setResponse(res.data.data);
+        setwebsiteresult(res.data.data);
       }
     } catch (error) {
       message.error(error.response.data.message);
@@ -153,11 +155,15 @@ const Cricket = () => {
       </Form>
 
       {/* //! Response Output */}
-      {response && (
+      {websiteresult && (
         <>
           <div className="mt-6 p-4 bg-gray-100 text-black rounded-lg">
             <h3 className="text-lg font-semibold">Response:</h3>
-            <JsonFormatter json={response} tabWith={4} jsonStyle={jsonStyle} />
+            <JsonFormatter
+              json={websiteresult}
+              tabWith={4}
+              jsonStyle={jsonStyle}
+            />
           </div>
         </>
       )}

@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import JsonFormatter from "react-json-formatter";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { useStateContext } from "../context/ContextProvider";
 
 const AdminInput = () => {
   const jsonStyle = {
@@ -15,6 +16,7 @@ const AdminInput = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [categorydata, setcategorydata] = useState([]);
+  const { adminoutput, setadminoutput } = useStateContext();
   // let categorydata = [];
   const fetchcategory = async () => {
     const res = await axios.get(
@@ -53,7 +55,7 @@ const AdminInput = () => {
       );
       if (res) {
         message.success(res.data.message);
-        setResponse(res.data.data);
+        setadminoutput(res.data.data);
       }
     } catch (error) {
       message.error(error.response.data.message);
@@ -119,7 +121,10 @@ const AdminInput = () => {
                         style={{ width: "60VW" }}
                       />
                     </Form.Item>
-                    <MinusCircleOutlined onClick={() => remove(name)} size={30} />
+                    <MinusCircleOutlined
+                      onClick={() => remove(name)}
+                      size={30}
+                    />
                   </Space>
                 ))}
                 <Form.Item>
@@ -150,11 +155,11 @@ const AdminInput = () => {
       </Form>
 
       {/* //! Response Output */}
-      {response && (
+      {adminoutput && (
         <>
           <div className="mt-6 p-4 bg-gray-100 text-black rounded-lg">
             <h3 className="text-lg font-semibold">Response:</h3>
-            <JsonFormatter json={response} tabWith={4} jsonStyle={jsonStyle} />
+            <JsonFormatter json={adminoutput} tabWith={4} jsonStyle={jsonStyle} />
           </div>
         </>
       )}

@@ -19,6 +19,10 @@ export const ContextProvider = ({ children }) => {
     const [themeSettings, setThemeSettings] = useState(false);
     const [currentColor, setCurrentColor] = useState('#03C9D7');
 
+
+    // store the ai result
+    const [websiteresult, setwebsiteresult] = useState(null);
+    const [adminoutput, setadminoutput] = useState([]);
     const handleClick = (clicked) => {
         setisClicked({ ...isClicked, [clicked]: true });
     }
@@ -33,7 +37,7 @@ export const ContextProvider = ({ children }) => {
         setThemeSettings(false)
     };
 
-    return <StateContext.Provider value={{ currentColor, currentMode, activeMenu, screenSize, setScreenSize, handleClick, isClicked, initalState, setisClicked, setActiveMenu, setMode, setColor, themeSettings, setThemeSettings, user, setuser }}
+    return <StateContext.Provider value={{ currentColor, currentMode, activeMenu, screenSize, setScreenSize, handleClick, isClicked, initalState, setisClicked, setActiveMenu, setMode, setColor, themeSettings, setThemeSettings, user, setuser, websiteresult, setwebsiteresult, adminoutput, setadminoutput }}
     >{children}</StateContext.Provider>
 }
 
