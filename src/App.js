@@ -12,6 +12,7 @@ import Categoryform from './components/subcomponents/Categoryform';
 import Keyword from './components/subcomponents/Keyword';
 import AdminInput from './components/AdminInput';
 import Cricket from './components/Cricket';
+import Data from './components/Ui/Data';
 //!  This method check that user is authenticated or not also check that user is Verified or not if not than it will redired to login or verify-email page 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, userData } = useAuth()
@@ -133,6 +134,9 @@ function App() {
       }, {
         path: 'admininput',
         element: <AdminInput />
+      }, {
+        path: 'data',
+        element: <Data />
       }
       ]
     }

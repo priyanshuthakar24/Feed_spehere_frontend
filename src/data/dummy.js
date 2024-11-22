@@ -57,6 +57,10 @@ export const links = [
                 name: 'Website Prompt',
                 icon: SquareTerminal,
             },
+            {
+                name: 'data',
+                icon: SquareTerminal,
+            },
             // {
             //     name: 'SubDomain',
             //     icon: SquareTerminal,
